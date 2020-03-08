@@ -1,0 +1,86 @@
+{
+  "ballotStyles": [
+    {
+      "id": "1",
+      "precincts": [
+        "1"
+      ],
+      "districts": [
+        "1"
+      ]
+    } 
+  ],
+  "county": {
+    "id": "1",
+    "name": "Boulder County"
+  },
+  "parties": [
+    {
+      "id": "0",
+      "name": "Non-Partisan",
+      "abbrev": "NP"
+    },
+    {
+      "id": "1",
+      "name": "Democrat",
+      "abbrev": "D"
+    },
+    {
+      "id": "2",
+      "name": "Republican",
+      "abbrev": "R"
+    }
+  ],
+  "precincts": [
+    {
+      "id": "1",
+      "name": "Town Hall"
+    }
+  ],
+  "districts": [
+    {
+      "id": "1",
+      "name": "State Of Hamilton"
+    }
+  ],
+  "contests": [
+    {
+      "seats": 1,
+      "candidates": [
+        {
+          "id": "roscoe",
+          "name": "Timothy Roscoe",
+          "partyId": "0"
+        },
+        {
+          "id": "wattenhofer",
+          "name": "Roger Wattenhofer",
+          "partyId": "0"
+        },
+        {
+          "id": "maurer",
+          "name": "Ueli Maurer",
+          "partyId": "0"
+        }
+      ],
+      "allowWriteIns": false,
+      "id": "president",
+      "districtId": "1",
+      "section": "Judicial",
+      "title": "Präsident ETH Zürich",
+      "type": "Candidate"
+    },
+    {
+      "description": "Should the tuition fees be increased at ETHZ?",
+      "id": "tuition",
+      "districtId": "1",
+      "section": "Referenda",
+      "title": "This is a Yes/No Question",
+      "type": "YesNo"
+    }
+  ],
+  "date": "March 5th, 2020",
+  "sealUrl": "/seals/Seal_of_Wisconsin.svg",
+  "state": "Canton of Zurich",
+  "title": "ETHZ Primary"
+}
