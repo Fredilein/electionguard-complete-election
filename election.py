@@ -19,6 +19,7 @@ registered_ballots_resolved_file_name = export_path + "/registered-ballots"
 tally_results_file_name = "tallies"
 
 
+
 print("\n### Create Election")
 
 num_trustees = input("Number of trustees: ")
@@ -44,6 +45,7 @@ res_create_json = res_create.json()
 print(res_create_json)
 
 
+
 print("\n### Initialize Encryption")
 
 electionguardconfig = res_create_json["electionGuardConfig"]
@@ -61,13 +63,19 @@ res_init_json = res_init.json()
 print(res_init_json)
 
 
+
+print("\n### Voting: Enter your votes in the Vue Ballot Marking Device now. Important: Remember ballot ID's")
+print("Come back here when done")
+
+
+
 print("\n### Load Ballots")
 
 ballot_count = input("Number of ballots: (Not manually in the future) ")
 
-encrypted_file_name_manual = input("Paste encrypted ballots file name: ")
+encrypted_file_name_manual = input("Paste encrypted ballots file name (located in the web-api/data/election_results/): ")
 if not encrypted_file_name_manual:
-    encrypted_file_name_manual = "encrypted-ballots_2020_3_8"
+    encrypted_file_name_manual = "encrypted-ballots_2020_3_9"
 encrypted_ballots_resolved_file_name = "/Users/adi/Documents/Studium/bachelor-thesis/electionguard/electionguard-web-api/data/election_results/" + encrypted_file_name_manual
 
 
@@ -81,6 +89,7 @@ data_str = json.dumps(data)
 res_load = requests.post(url, data=data_str, headers=HEADERS)
 res_load_json = res_load.json()
 print(res_load_json)
+
 
 
 print("\n### Record Ballots")
@@ -113,6 +122,7 @@ res_record = requests.post(url, data=data_str, headers=HEADERS)
 print(res_record.text)
 
 
+
 print("\n### Tally Votes")
 
 election_map = res_create_json["electionMap"]
@@ -138,3 +148,20 @@ with open("temp.txt", "w") as f:
 res_tally = requests.post(url, data=data_str, headers=HEADERS)
 res_tally_json = res_tally.json()
 print(res_tally_json)
+
+
+print("\n### Formatted Results")
+
+for i, contest in enumerate(election["contests"]):
+    print("Contest {}: {}".format(i, contest["title"]))
+    if contest["type"]== "Candidate":
+        for j, candidate in enumerate(contest["candidates"]):
+            print("{}: {}".format(candidate["name"], res_tally_json["tallyResults"][i]["candidates"][j]))
+    elif contest["type"] == "YesNo":
+        print("Yes: {}".format(res_tally_json["tallyResults"][i]["yes"]))
+        print("No: {}".format(res_tally_json["tallyResults"][i]["no"]))
+    else:
+        print("Contest type not yet supported")
+
+
+
